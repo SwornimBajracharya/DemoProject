@@ -39,14 +39,19 @@ namespace CRUDOperationAPI.Implementation
             }
             return data;
         }
-        public Employee DeleteEmployee(int id)
+        public int DeleteEmployee(int id)
         {
-            var data = new Employee();
+            int exe;
+            //var data = new Employee();
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                data = db.Query<Employee>("Delete from Employees where EmployeeID = @EmployeeID", new { EmployeeId = id }).SingleOrDefault();
+               string data = "Delete from Employees where EmployeeID = @EmployeeID";
+                exe = db.Execute(data, new
+                {
+                    EmployeeID = id
+                });
             }
-            return data;
+            return exe;
         }
 
         public void PostEmployee(Employee emp)

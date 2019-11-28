@@ -114,7 +114,7 @@ namespace CRUDOperationAPI.Controllers
 
             var employees = _employee.DeleteEmployee(id);
             //var employees = _context.Employees.FirstOrDefault(e => e.EmployeeId == id);
-            if (employees == null)
+            if (employees == 0)
             {
                 return NotFound();
             }
