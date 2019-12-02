@@ -95,5 +95,16 @@ namespace CRUDOperationAPI.Implementation
             }
 
         }
+        public int CountEmployee()
+        {
+            int exe;
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                // string sqlQuery = "Select Count(Distinct(EmployeeID)) from Employees";
+                // exe= db.Execute(sqlQuery);
+                 exe = db.Query<int>("Select Count(Distinct(EmployeeID)) from Employees").FirstOrDefault();
+            }
+            return exe;
+        }
     }
 }

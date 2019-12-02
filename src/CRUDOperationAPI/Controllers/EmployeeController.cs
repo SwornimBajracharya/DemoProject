@@ -101,7 +101,7 @@ namespace CRUDOperationAPI.Controllers
 
             
 
-            return NoContent();
+            return Ok();
         }
         //// DELETE api/values/5
         [HttpDelete("{id}")]
@@ -123,6 +123,13 @@ namespace CRUDOperationAPI.Controllers
             //await _context.SaveChangesAsync();
 
             return Ok(employees);
+        }
+        [Route("EmployeeCount")]
+        [HttpGet]
+        public IActionResult EmployeeCount()
+        {
+            var countEmployee = _employee.CountEmployee();
+            return Ok(countEmployee);
         }
         
      }

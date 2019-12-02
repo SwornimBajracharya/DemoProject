@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,13 +11,14 @@ namespace CRUDOperationAPI.Models
     {
         [Key]
         public int EmployeeId { get; set; }
-        [Required(ErrorMessage = "Please enter name of the employee")]
-        public string Name { get; set; }
-        [Required(ErrorMessage = "Please enter address of the employee")]
-        public string Address { get; set; }
-        [Required(ErrorMessage = "Please enter company name of the employee")]
-        public string CompanyName { get; set; }
-        [Required(ErrorMessage = "Please enter designation of the employee")]
+        public virtual int? ContactId { get; set; }
         public string Designation { get; set; }
+        public string Department { get; set; } 
+        public decimal Salary { get; set; }
+        public float WorkingHrPerDay { get; set; }
+        public bool IsFullTimer { get; set; } 
+
+        [ForeignKey("ContactId")]
+        public virtual Contacts Contacts { get; set; }
     }
 }
