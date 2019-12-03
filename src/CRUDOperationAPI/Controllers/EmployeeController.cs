@@ -22,18 +22,19 @@ namespace CRUDOperationAPI.Controllers
     public class EmployeeController : Controller
     {
         
-        private EmployeeImplementation _employee;
+        private IEmployee _employee;
 
-        public EmployeeController(IOptions<ConnectionConfig> connectionConfig)
+        public EmployeeController(IEmployee employee)
         {
-            //_context = context;
-            var connection = connectionConfig.Value;
-            string connectionString = connection.myconn;
-            _employee = new EmployeeImplementation(connectionString);
-           
+            _employee = employee;
+        //    //_context = context;
+        //    //var connection = connectionConfig.Value;
+        //    //string connectionString = connection.myconn;
+        //    //_employee = new EmployeeImplementation(connectionString);
+
 
         }
-        // GET: api/values
+            // GET: api/values
         [HttpGet]
         public IEnumerable<EmployeeContacts> Get()
         {
@@ -43,7 +44,7 @@ namespace CRUDOperationAPI.Controllers
             //    var eventName = connection.QueryFirst<Employee>("SELECT * FROM Employees");
             //    yield return eventName;
             //}
-            var getAllEmployee = _employee.GetAll();
+            var getAllEmployee =  _employee.GetAll();
             return getAllEmployee;
 
         }

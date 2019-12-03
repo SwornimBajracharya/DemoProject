@@ -22,6 +22,7 @@
 --reference:C:\Users\percoid-IT\.nuget\packages\Microsoft.AspNetCore.Cryptography.Internal\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Cryptography.Internal.dll
 --reference:C:\Users\percoid-IT\.nuget\packages\Microsoft.AspNetCore.DataProtection\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.DataProtection.dll
 --reference:C:\Users\percoid-IT\.nuget\packages\Microsoft.AspNetCore.DataProtection.Abstractions\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.DataProtection.Abstractions.dll
+--reference:C:\Users\percoid-IT\.nuget\packages\Microsoft.AspNetCore.Diagnostics\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Diagnostics.dll
 --reference:C:\Users\percoid-IT\.nuget\packages\Microsoft.AspNetCore.Diagnostics.Abstractions\1.0.0\lib\netstandard1.0\Microsoft.AspNetCore.Diagnostics.Abstractions.dll
 --reference:C:\Users\percoid-IT\.nuget\packages\Microsoft.AspNetCore.Hosting\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Hosting.dll
 --reference:C:\Users\percoid-IT\.nuget\packages\Microsoft.AspNetCore.Hosting.Abstractions\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Hosting.Abstractions.dll
@@ -190,11 +191,17 @@ D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\EmployeeDbContextModelSnapsh
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Program.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Startup.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Contexts\EmployeeDbContext.cs
+D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Controllers\ClientController.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Controllers\EmployeeController.cs
+D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Controllers\ProjectController.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Controllers\ValuesController.cs
+D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Implementation\ClientImplementation.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Implementation\EmployeeImplementation.cs
+D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Implementation\ProjectImplementation.cs
+D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\InterfaceClass\IClient.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\InterfaceClass\IConnection.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\InterfaceClass\IEmployee.cs
+D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\InterfaceClass\IProject.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Migrations\20191119081424_InitialUpdate.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Migrations\20191119081424_InitialUpdate.Designer.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Migrations\20191122040723_InitialDatabase.cs
@@ -203,6 +210,8 @@ D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Migrations\20191202081948_Up
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Migrations\20191202081948_Updated Database.Designer.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Migrations\20191202082720_Updated Database with primary key.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Migrations\20191202082720_Updated Database with primary key.Designer.cs
+D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Migrations\20191203091148_Updated projects table.cs
+D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Migrations\20191203091148_Updated projects table.Designer.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Models\ClientProject.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Models\Clients.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Models\ConnectionConfig.cs
@@ -211,4 +220,5 @@ D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Models\Employee.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Models\EmployeeProject.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Models\EmployeeSchedule.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\Models\Projects.cs
+D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\ViewModels\ClientProjectViewModel.cs
 D:\Assignment\CRUDOperationAPI\src\CRUDOperationAPI\ViewModels\EmployeeContacts.cs

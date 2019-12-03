@@ -11,93 +11,86 @@ using CRUDOperationAPI.ViewModels;
 namespace CRUDOperationAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class ClientController : Controller
+    public class ProjectController : Controller
     {
-        private IClient _client;
-        public ClientController(IClient client)
+        private IProject _project;
+        public ProjectController(IProject project)
         {
-            _client = client;
+            _project = project;
         }
+        // GET: api/values
         [HttpGet]
         public IEnumerable<ClientProjectViewModel> Get()
         {
-            var getAllClient = _client.GetALL();
-            return getAllClient;
-        }
-        // GET: api/values
-        [Route("ClientProject")]
-        [HttpGet]
-        public IEnumerable<ClientProjectViewModel> GetClientAndProjectDetail()
-        {
-            var getAllClient = _client.GetClientProject();
-            return getAllClient;
+            var getAllProject = _project.GetAll();
+            return getAllProject;
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetClients(int id)
+        public async Task<IActionResult> GetProjects(int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var clients = _client.GetClientByID(id);
-            if (clients == null)
+            var projects = _project.GetProjectByID(id);
+            if (projects == null)
             {
                 return NotFound();
             }
-            return Ok(clients);
-
+            return Ok(projects);
         }
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> PostClients([FromBody]ClientProjectViewModel clients)
+        public async Task<IActionResult> PostProjects([FromBody]ClientProjectViewModel projects)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            _client.PostClient(clients);
-            return CreatedAtAction("GetClients", new { id = clients.ClientID }, clients);
+            _project.PostProject(projects);
+            return CreatedAtAction("GetProjects", new { id = projects.ProjectID }, projects);
+
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClients(int id, [FromBody]ClientProjectViewModel clients)
+        public async Task<IActionResult> PutProjects(int id, [FromBody]ClientProjectViewModel projects)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (id != clients.ClientID)
+            if (id != projects.ProjectID)
             {
                 return BadRequest();
             }
-            _client.PutClient(clients);
+            _project.PutProject(projects);
             return Ok();
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClients(int id)
+        public async Task<IActionResult> DeleteProjects(int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var clients = _client.DeleteClient(id);
-            if(clients == 0)
+            var projects = _project.DeleteProject(id);
+            if (projects == 0)
             {
                 return NotFound();
             }
-            return Ok(clients);
+            return Ok(projects);
         }
-        [Route("ClientCount")]
+        [Route("ProjectCount")]
         public IActionResult ProjectCount()
         {
-            var countClient = _client.CountClient();
-            return Ok(countClient);
+            var countProject = _project.CountProject();
+            return Ok(countProject);
         }
     }
 }

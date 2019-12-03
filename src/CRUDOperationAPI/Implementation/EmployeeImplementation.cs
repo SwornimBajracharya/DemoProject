@@ -13,15 +13,17 @@ using CRUDOperationAPI.Connections;
 
 namespace CRUDOperationAPI.Implementation
 {
-    public class EmployeeImplementation 
+    public class EmployeeImplementation : IConnection, IEmployee
     {
         private string _connectionString;
 
         //private IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["myconn"].ConnectionString);
 
-        public EmployeeImplementation(string connectionString)
+        public EmployeeImplementation(IOptions<ConnectionConfig> connectionConfig)
         {
-            _connectionString = connectionString;
+            var connection = connectionConfig.Value;
+            string connectionString = connection.myconn;
+            _connectionString = Connections(connectionString);
           
         }
         public List<EmployeeContacts> GetAll()
@@ -149,7 +151,6 @@ namespace CRUDOperationAPI.Implementation
 
         public string Connections(string ConnectionString)
         {
-            _connectionString = ConnectionString;
             return ConnectionString;
         }
     }

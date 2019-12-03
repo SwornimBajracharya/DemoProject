@@ -7,13 +7,13 @@ namespace CRUDOperationAPI.ViewModels
 {
     public class EmployeeContacts
     {
-        public int EmployeeID { get; set; }
-        public int ContactID { get; set; }
+        public int? EmployeeID { get; set; }
+        public int? ContactID { get; set; }
         public string Designation { get; set; }
         public string Department { get; set; }
-        public decimal Salary { get; set; }
-        public float WorkingHrPerDay { get; set; }
-        public bool IsFullTimer { get; set; }
+        public decimal? Salary { get; set; }
+        public float? WorkingHrPerDay { get; set; }
+        public bool? IsFullTimer { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
