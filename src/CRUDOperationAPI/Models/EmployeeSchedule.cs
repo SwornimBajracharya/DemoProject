@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace CRUDOperationAPI.Models
 {
-    public class EmployeeProject
+    public class EmployeeSchedule
     {
         [Key]
-        public int EmployeeProjectID { get; set; }
-        public virtual int ProjectID { get; set; }
+        public int ScheduleID { get; set; }
         public virtual int EmployeeID { get; set; }
+        public DateTime? InTime { get; set; }
+        public DateTime? OutTime { get; set; }
+        public decimal? TotalHourWorkPerday { get; set; }
 
-        [ForeignKey("ProjectID")]
-        public virtual Projects Projects { get; set; }
         [ForeignKey("EmployeeID")]
         public virtual Employee Employee { get; set; }
     }

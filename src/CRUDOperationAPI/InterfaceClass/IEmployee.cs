@@ -1,4 +1,5 @@
 ﻿using CRUDOperationAPI.Models;
+using CRUDOperationAPI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,12 @@ namespace CRUDOperationAPI
 {
     public interface IEmployee
     {
-        List<Employee> GetAll();
-        Employee GetEmployeeByID(int id);
-        Employee DeleteEmployee(int id);
+        List<EmployeeContacts> GetAll();
+        EmployeeContacts GetEmployeeByID(int id);
+        int DeleteEmployee(int id);
+        void PostEmployee(EmployeeContacts emp);
+        void PutEmployee(EmployeeContacts emp);
+        int CountEmployee();
+
     }
 }

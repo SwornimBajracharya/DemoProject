@@ -12,6 +12,7 @@ using Dapper;
 using Microsoft.Extensions.Options;
 using CRUDOperationAPI.Connections;
 using CRUDOperationAPI.Implementation;
+using CRUDOperationAPI.ViewModels;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,6 +23,7 @@ namespace CRUDOperationAPI.Controllers
     {
         
         private EmployeeImplementation _employee;
+
         public EmployeeController(IOptions<ConnectionConfig> connectionConfig)
         {
             //_context = context;
@@ -33,7 +35,7 @@ namespace CRUDOperationAPI.Controllers
         }
         // GET: api/values
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public IEnumerable<EmployeeContacts> Get()
         {
             //return _context.Employees;
             //using (SqlConnection connection = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=EmployeeDb;Trusted_Connection=True;MultipleActiveResultSets=true"))
@@ -71,7 +73,7 @@ namespace CRUDOperationAPI.Controllers
         // POST api/values
 
         [HttpPost]
-        public async Task<IActionResult> PostEmployees([FromBody] Employee employees)
+        public async Task<IActionResult> PostEmployees([FromBody] EmployeeContacts employees)
         {
             if (!ModelState.IsValid)
             {
@@ -80,26 +82,26 @@ namespace CRUDOperationAPI.Controllers
 
             _employee.PostEmployee(employees);
 
-            return CreatedAtAction("GetEmplooyes", new { id = employees.EmployeeId }, employees);
+            return CreatedAtAction("GetEmplooyes", new { id = employees.EmployeeID }, employees);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployees([FromRoute] int id, [FromBody] Employee employees)
+        public async Task<IActionResult> PutEmployees([FromRoute] int id, [FromBody] EmployeeContacts employees)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != employees.EmployeeId)
+            if (id != employees.ContactID)
             {
                 return BadRequest();
             }
 
             _employee.PutEmployee(employees);
 
-            
+
 
             return Ok();
         }
