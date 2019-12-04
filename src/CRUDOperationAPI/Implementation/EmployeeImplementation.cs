@@ -153,5 +153,75 @@ namespace CRUDOperationAPI.Implementation
         {
             return ConnectionString;
         }
+
+        public List<EmployeeProjectViewModel> GetEmployeeWithProject()
+        {
+            var data = new List<EmployeeProjectViewModel>();
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                data = db.Query<EmployeeProjectViewModel>("SELECT Employees.EmployeeID, Contacts.ContactID, Contacts.FirstName, Contacts.LastName, Contacts.Address, Contacts.Email, Contacts.ContactNumber, Contacts.EmergencyContactNumber, Employees.Designation, Employees.Department, Projects.ProjectID, Projects.ProjectName,EmployeeProject.EmployeeProjectID FROM EmployeeProject Join Employees On (Employees.EmployeeID = EmployeeProject.EmployeeID) Join Contacts ON (Contacts.ContactID = Employees.ContactID) JOIN Projects ON (Projects.ProjectID = EmployeeProject.ProjectID)").ToList();
+            }
+            return data;
+        }
+
+        public void AssignProjectToEmployee(EmployeeProjectViewModel empPro)
+        {
+            try
+            {
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    var parameter = new DynamicParameters();
+                    parameter.Add("@EmployeeID", empPro.EmployeeID);
+                    parameter.Add("@ProjectID", empPro.ProjectID);
+                    db.Execute("AssignProjectToEmployee", parameter, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+
+        public void UpdateProjectToEmployee(EmployeeProjectViewModel empPro)
+        {
+            try
+            {
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    var parameter = new DynamicParameters();
+                    parameter.Add("@EmployeeID", empPro.EmployeeID);
+                    parameter.Add("@ProjectID", empPro.ProjectID);
+                    parameter.Add("@EmployeeProjectID", empPro.EmployeeProjectID);
+                    db.Execute("UpdateProjectEmployee", parameter, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int DeleteEmployeeAndProject(int id)
+        {
+            try
+            {
+                int exe;
+                //var data = new Employee();
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    string data = "Delete from EmployeeProject where EmployeeProjectID = @EmployeeProjectID";
+                    exe = db.Execute(data, new
+                    {
+                        EmployeeProjectID = id
+                    });
+                }
+                return exe;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -63,10 +63,10 @@ namespace CRUDOperationAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (id != projects.ProjectID)
-            {
-                return BadRequest();
-            }
+            //if (id != projects.ProjectID)
+            //{
+            //    return BadRequest();
+            //}
             _project.PutProject(projects);
             return Ok();
         }

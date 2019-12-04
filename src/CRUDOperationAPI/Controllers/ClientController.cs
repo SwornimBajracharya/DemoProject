@@ -29,8 +29,23 @@ namespace CRUDOperationAPI.Controllers
         [HttpGet]
         public IEnumerable<ClientProjectViewModel> GetClientAndProjectDetail()
         {
-            var getAllClient = _client.GetClientProject();
-            return getAllClient;
+            var getAllClientProject = _client.GetClientProject();
+            return getAllClientProject;
+        }
+        [Route("ClientProject/UpdateClientProject")]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateClientProject(int id, [FromBody]ClientProjectViewModel clients)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (id != clients.ClientProjectID)
+            {
+                return BadRequest();
+            }
+            _client.UpdateClientProject(clients);
+            return Ok();
         }
 
         // GET api/values/5

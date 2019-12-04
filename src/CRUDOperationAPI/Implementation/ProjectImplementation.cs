@@ -94,8 +94,8 @@ namespace CRUDOperationAPI.Implementation
                 {
                     var parameter = new DynamicParameters();
                      parameter.Add("@ProjectName", client.ProjectName);
-                     parameter.Add("@ProjectStartDate", client.ProjectStartDate);
-                     parameter.Add("@ProjectEndDate", client.ProjectEndDate);
+                     parameter.Add("@ProjectStartDate", Convert.ToDateTime(client.ProjectStartDate));
+                     parameter.Add("@ProjectEndDate", Convert.ToDateTime(client.ProjectEndDate));
                      db.Execute("InsertIntoProject", parameter, commandType: CommandType.StoredProcedure);
 
 

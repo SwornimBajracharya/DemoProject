@@ -10,17 +10,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using CRUDOperationAPI.Models;
 using Dapper;
+using CRUDOperationAPI.Contexts;
 
 namespace CRUDOperationAPI.Implementation
 {
     public class ClientImplementation : IConnection, IClient
     {
         private string _connectionString;
-        public ClientImplementation(IOptions<ConnectionConfig> connectionConfig)
+        private EmployeeDbContext _db;
+        string message = "";
+        public ClientImplementation(IOptions<ConnectionConfig> connectionConfig, EmployeeDbContext db)
         {
             var connection = connectionConfig.Value;
             string connectionString = connection.myconn;
             _connectionString = Connections(connectionString);
+            _db = db;
         }
 
         public string Connections(string ConnectionString)
@@ -94,17 +98,53 @@ namespace CRUDOperationAPI.Implementation
         {
             try
             {
-                using (IDbConnection db = new SqlConnection(_connectionString))
+                //using (IDbConnection db = new SqlConnection(_connectionString))
+                //{
+                //    var parameter = new DynamicParameters();
+
+                //    foreach (var items in client.ProjectID)
+                //    {
+                //        parameter.Add("@ProjectID", items);
+                //    }
+                //    parameter.Add("@ClientFirstName", client.ClientFirstName);
+                //    parameter.Add("@ClientLastName", client.ClientLastName);
+                //    parameter.Add("@ClientOffice", client.ClientOffice);
+                //    parameter.Add("@OfficeAddress", client.OfficeAddress);
+                //    parameter.Add("@ClientContactNumber", client.ClientContactNumber);
+                //    db.Execute("InsertIntoClientProjects", parameter, commandType: CommandType.StoredProcedure);
+                //_db.Clients.Add(client.ClientID, client.ClientFirstName, client.ClientLastName, client.ClientOffice, client.ClientContactNumber);
+                var getContact = _db.Clients.Where(x => x.ClientContactNumber == client.ClientContactNumber && x.ClientFirstName == client.ClientFirstName && x.ClientLastName == client.ClientLastName);
+                if (getContact.Count() == 0)
                 {
-                    var parameter = new DynamicParameters();
-                    parameter.Add("@ClientFirstName", client.ClientFirstName);
-                    parameter.Add("@ClientLastName", client.ClientLastName);
-                    parameter.Add("@ClientOffice", client.ClientOffice);
-                    parameter.Add("@OfficeAddress", client.OfficeAddress);
-                    parameter.Add("@ClientContactNumber", client.ClientContactNumber);
-                    parameter.Add("@ProjectID", client.ProjectID);
-                    db.Execute("InsertIntoClientProjects", parameter, commandType: CommandType.StoredProcedure);
+                    var clientDetail = new Clients
+                    {
+
+                        ClientFirstName = client.ClientFirstName,
+                        ClientLastName = client.ClientLastName,
+                        ClientContactNumber = client.ClientContactNumber,
+                        ClientOffice = client.ClientOffice,
+                        OfficeAddress = client.OfficeAddress
+                    };
+                    _db.Clients.Add(clientDetail);
+                    _db.SaveChanges();
+                    foreach (var x in client.ProjectID)
+                    {
+                        var clientProject = new ClientProject
+                        {
+                            ClientID = clientDetail.ClientID,
+                            ProjectID = x
+                        };
+                        _db.ClientProject.Add(clientProject);
+                    }
+                    _db.SaveChanges();
                 }
+                else
+                {
+                    message = "Cant enter data";
+                }
+               
+                
+                
             }
             catch (Exception ex)
             {
@@ -125,14 +165,24 @@ namespace CRUDOperationAPI.Implementation
                     parameter.Add("@OfficeAddress", client.OfficeAddress);
                     parameter.Add("@ClientContactNumber", client.ClientContactNumber);
                     parameter.Add("@ClientID", client.ClientID);
-                    parameter.Add("@ClientProjectID", client.ClientProjectID);
-                    parameter.Add("@ProjectID", client.ProjectID);
                     db.Execute("UpdateClient", parameter, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+        public void UpdateClientProject(ClientProjectViewModel client)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@ClientID", client.ClientID);
+                parameter.Add("@ClientProjectID", client.ClientProjectID);
+                parameter.Add("@ProjectID", client.ProjectID);
+                db.Execute("UpdateClientProject", parameter, commandType: CommandType.StoredProcedure);
+
             }
         }
 

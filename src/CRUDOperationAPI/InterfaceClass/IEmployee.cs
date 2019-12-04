@@ -15,6 +15,10 @@ namespace CRUDOperationAPI
         void PostEmployee(EmployeeContacts emp);
         void PutEmployee(EmployeeContacts emp);
         int CountEmployee();
+        List<EmployeeProjectViewModel> GetEmployeeWithProject();
+        void AssignProjectToEmployee(EmployeeProjectViewModel empPro);
+        void UpdateProjectToEmployee(EmployeeProjectViewModel empPro);
+        int DeleteEmployeeAndProject(int id);
 
     }
 }

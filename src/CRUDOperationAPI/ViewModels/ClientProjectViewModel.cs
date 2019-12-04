@@ -8,7 +8,7 @@ namespace CRUDOperationAPI.ViewModels
     public class ClientProjectViewModel
     {
         public int ClientProjectID { get; set; }
-        public int ProjectID { get; set; }
+        public List<int> ProjectID { get; set; }
         public int ClientID { get; set; }
         public string ProjectName { get; set; }
         public string ProjectStartDate { get; set; }
