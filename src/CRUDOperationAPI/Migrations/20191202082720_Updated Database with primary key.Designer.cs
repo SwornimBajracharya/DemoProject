@@ -8,9 +8,10 @@ using CRUDOperationAPI.Contexts;
 namespace CRUDOperationAPI.Migrations
 {
     [DbContext(typeof(EmployeeDbContext))]
-    partial class EmployeeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191202082720_Updated Database with primary key")]
+    partial class UpdatedDatabasewithprimarykey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -54,18 +55,6 @@ namespace CRUDOperationAPI.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("CRUDOperationAPI.Models.Company", b =>
-                {
-                    b.Property<int>("CompanyID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CompanyName");
-
-                    b.HasKey("CompanyID");
-
-                    b.ToTable("Companies");
-                });
-
             modelBuilder.Entity("CRUDOperationAPI.Models.Contacts", b =>
                 {
                     b.Property<int>("ContactID")
@@ -76,8 +65,6 @@ namespace CRUDOperationAPI.Migrations
 
                     b.Property<string>("ContactNumber")
                         .IsRequired();
-
-                    b.Property<DateTime>("CreatedTimeStamp");
 
                     b.Property<string>("Email")
                         .IsRequired();
@@ -91,45 +78,9 @@ namespace CRUDOperationAPI.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
-                    b.Property<DateTime>("ModifiedTimeStamp");
-
                     b.HasKey("ContactID");
 
                     b.ToTable("Contacts");
-                });
-
-            modelBuilder.Entity("CRUDOperationAPI.Models.DepartmentEmployee", b =>
-                {
-                    b.Property<int>("DepartmentEmployeeID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("DepartmentID");
-
-                    b.Property<int>("EmployeeID");
-
-                    b.HasKey("DepartmentEmployeeID");
-
-                    b.HasIndex("DepartmentID");
-
-                    b.HasIndex("EmployeeID");
-
-                    b.ToTable("DepartmentEmployee");
-                });
-
-            modelBuilder.Entity("CRUDOperationAPI.Models.Departments", b =>
-                {
-                    b.Property<int>("DepartmentID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CompanyID");
-
-                    b.Property<string>("DepartmentName");
-
-                    b.HasKey("DepartmentID");
-
-                    b.HasIndex("CompanyID");
-
-                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("CRUDOperationAPI.Models.Employee", b =>
@@ -139,25 +90,19 @@ namespace CRUDOperationAPI.Migrations
 
                     b.Property<int?>("ContactId");
 
-                    b.Property<DateTime>("CreatedTimeStamp");
+                    b.Property<string>("Department");
 
                     b.Property<string>("Designation");
 
                     b.Property<bool>("IsFullTimer");
 
-                    b.Property<bool>("IsWorking");
-
-                    b.Property<DateTime>("ModifiedTimeStamp");
-
                     b.Property<decimal>("Salary");
 
-                    b.Property<int?>("UserID");
+                    b.Property<float>("WorkingHrPerDay");
 
                     b.HasKey("EmployeeId");
 
                     b.HasIndex("ContactId");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Employees");
                 });
@@ -185,13 +130,9 @@ namespace CRUDOperationAPI.Migrations
                     b.Property<int>("ScheduleID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("CreatedTimeStamp");
-
                     b.Property<int>("EmployeeID");
 
                     b.Property<DateTime?>("InTime");
-
-                    b.Property<DateTime>("ModifiedTimeStamp");
 
                     b.Property<DateTime?>("OutTime");
 
@@ -204,88 +145,20 @@ namespace CRUDOperationAPI.Migrations
                     b.ToTable("EmployeeSchedule");
                 });
 
-            modelBuilder.Entity("CRUDOperationAPI.Models.Leaves", b =>
-                {
-                    b.Property<int>("LeaveID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ArrovedBy");
-
-                    b.Property<DateTime>("CreatedTimeStamp");
-
-                    b.Property<int>("EmployeeID");
-
-                    b.Property<DateTime>("EndDate");
-
-                    b.Property<string>("LeaveReason");
-
-                    b.Property<string>("LeaveType");
-
-                    b.Property<DateTime>("ModifiedTimeStamp");
-
-                    b.Property<DateTime>("StartDate");
-
-                    b.Property<string>("Status");
-
-                    b.HasKey("LeaveID");
-
-                    b.HasIndex("EmployeeID");
-
-                    b.ToTable("Leaves");
-                });
-
             modelBuilder.Entity("CRUDOperationAPI.Models.Projects", b =>
                 {
                     b.Property<int>("ProjectID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("CreatedTimeStamp");
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<DateTime>("ModifiedTimeStamp");
-
-                    b.Property<string>("ProjectDescription");
-
-                    b.Property<DateTime>("ProjectEndDate");
+                    b.Property<string>("ProjectEndDate");
 
                     b.Property<string>("ProjectName");
 
-                    b.Property<DateTime>("ProjectStartDate");
+                    b.Property<string>("ProjectStartDate");
 
                     b.HasKey("ProjectID");
 
                     b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("CRUDOperationAPI.Models.Roles", b =>
-                {
-                    b.Property<int>("RoleID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("RoleName");
-
-                    b.HasKey("RoleID");
-
-                    b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("CRUDOperationAPI.Models.Users", b =>
-                {
-                    b.Property<int>("UserID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Password");
-
-                    b.Property<int>("RoleID");
-
-                    b.Property<string>("UserName");
-
-                    b.HasKey("UserID");
-
-                    b.HasIndex("RoleID");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("CRUDOperationAPI.Models.ClientProject", b =>
@@ -301,36 +174,11 @@ namespace CRUDOperationAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CRUDOperationAPI.Models.DepartmentEmployee", b =>
-                {
-                    b.HasOne("CRUDOperationAPI.Models.Departments", "Departments")
-                        .WithMany()
-                        .HasForeignKey("DepartmentID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CRUDOperationAPI.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CRUDOperationAPI.Models.Departments", b =>
-                {
-                    b.HasOne("CRUDOperationAPI.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("CRUDOperationAPI.Models.Employee", b =>
                 {
                     b.HasOne("CRUDOperationAPI.Models.Contacts", "Contacts")
                         .WithMany()
                         .HasForeignKey("ContactId");
-
-                    b.HasOne("CRUDOperationAPI.Models.Users", "Users")
-                        .WithMany()
-                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("CRUDOperationAPI.Models.EmployeeProject", b =>
@@ -351,22 +199,6 @@ namespace CRUDOperationAPI.Migrations
                     b.HasOne("CRUDOperationAPI.Models.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CRUDOperationAPI.Models.Leaves", b =>
-                {
-                    b.HasOne("CRUDOperationAPI.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CRUDOperationAPI.Models.Users", b =>
-                {
-                    b.HasOne("CRUDOperationAPI.Models.Roles", "Roles")
-                        .WithMany()
-                        .HasForeignKey("RoleID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

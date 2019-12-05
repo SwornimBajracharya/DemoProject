@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using CRUDOperationAPI.Contexts;
 using Microsoft.EntityFrameworkCore;
 using CRUDOperationAPI.Connections;
+using CRUDOperationAPI.Implementation;
+using CRUDOperationAPI.InterfaceClass;
 
 namespace CRUDOperationAPI
 {
@@ -46,7 +48,9 @@ namespace CRUDOperationAPI
             services.AddDbContext<EmployeeDbContext>(item =>
             item.UseSqlServer(Configuration.GetConnectionString("myconn")));
             services.AddCors();
-
+            services.AddScoped<IEmployee, EmployeeImplementation>();
+            services.AddScoped<IClient, ClientImplementation>();
+            services.AddScoped<IProject, ProjectImplementation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -56,7 +60,7 @@ namespace CRUDOperationAPI
             loggerFactory.AddDebug();
 
             app.UseApplicationInsightsRequestTelemetry();
-
+            app.UseDeveloperExceptionPage();
             app.UseApplicationInsightsExceptionTelemetry();
             app.UseCors(
                option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
