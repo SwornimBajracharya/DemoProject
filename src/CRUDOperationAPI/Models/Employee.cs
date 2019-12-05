@@ -12,13 +12,17 @@ namespace CRUDOperationAPI.Models
         [Key]
         public int EmployeeId { get; set; }
         public virtual int? ContactId { get; set; }
+        public virtual int? UserID { get; set; }
         public string Designation { get; set; }
-        public string Department { get; set; } 
+        public bool IsWorking { get; set; } 
         public decimal Salary { get; set; }
-        public float WorkingHrPerDay { get; set; }
         public bool IsFullTimer { get; set; } 
+        public DateTime CreatedTimeStamp { get; set; }
+        public DateTime ModifiedTimeStamp { get; set; }
 
         [ForeignKey("ContactId")]
         public virtual Contacts Contacts { get; set; }
+        [ForeignKey("UserID")]
+        public virtual Users Users { get; set; }
     }
 }

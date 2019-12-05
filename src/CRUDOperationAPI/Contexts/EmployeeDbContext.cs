@@ -22,5 +22,17 @@ namespace CRUDOperationAPI.Contexts
         public DbSet<EmployeeProject> EmployeeProject { get; set; }
         public DbSet<EmployeeSchedule> EmployeeSchedule { get; set; }
         public DbSet<ClientProject> ClientProject { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Departments> Departments { get; set; }
+        public DbSet<DepartmentEmployee> DepartmentEmployee { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<Roles> Roles { get; set; }
+        public DbSet<Leaves> Leaves { get; set; }
+
+
+
+
+
+
     }
 }

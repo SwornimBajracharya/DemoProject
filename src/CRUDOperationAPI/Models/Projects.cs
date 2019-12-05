@@ -11,7 +11,11 @@ namespace CRUDOperationAPI.Models
         [Key]
         public int ProjectID { get; set; }
         public string ProjectName { get; set; }
+        public string ProjectDescription { get; set; }
         public DateTime ProjectStartDate { get; set; }
         public DateTime ProjectEndDate { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreatedTimeStamp { get; set; }
+        public DateTime ModifiedTimeStamp { get; set; }
     }
 }
